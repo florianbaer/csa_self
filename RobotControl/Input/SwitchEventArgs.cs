@@ -1,48 +1,33 @@
-﻿//------------------------------------------------------------------------------
-// C #   I N   A C T I O N   ( C S A )
-//------------------------------------------------------------------------------
-// Repository:
-//    $Id: SwitchEventArgs.cs 1024 2016-10-11 12:06:49Z chj-hslu $
-//------------------------------------------------------------------------------
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace RobotCtrl
 {
 
     /// <summary>
-    /// EventArgs-Klasse um über Änderungen der Schalter zu informieren.
+    /// EventArgs data object used by the <see cref="Switch"/>
     /// </summary>
     public class SwitchEventArgs : EventArgs
     {
-
-        #region constructor & destructor
         /// <summary>
-        /// Initialisiert die SwitchEventArgs-Klasse
+        /// Initialise the event args.
         /// </summary>
-        /// <param name="swi">der betroffene Schalter</param>
-        /// <param name="switchEnabled">der aktuelle Zustand des Schalters</param>
+        /// <param name="swi">the switch that got changed</param>
+        /// <param name="switchEnabled">the current state of the switch</param>
         public SwitchEventArgs(Switches swi, bool switchEnabled)
         {
             Swi = swi;
             SwitchEnabled = switchEnabled;
         }
-        #endregion
-
-
-        #region properties
+        
         /// <summary>
-        /// Liefert bzw. setzt die Eigenschaft, ob der Schalter aktiviert ist oder nicht
+        /// The state of the switch (true = on, false = off).
         /// </summary>
         public bool SwitchEnabled { get; set; }
 
 
         /// <summary>
-        /// Liefert bzw. setzt den betroffenen Schalter
+        /// The switch of the event.
         /// </summary>
         public Switches Swi { get; set; }
-        #endregion
     }
 }

@@ -1,13 +1,4 @@
-﻿//------------------------------------------------------------------------------
-// C #   I N   A C T I O N   ( C S A )
-//------------------------------------------------------------------------------
-// Repository:
-//    $Id: Led.cs 1024 2016-10-11 12:06:49Z chj-hslu $
-//------------------------------------------------------------------------------
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace RobotCtrl
 {
@@ -22,29 +13,21 @@ namespace RobotCtrl
 
 
     /// <summary>
-    /// Diese Klasse bildet eine LED des Roboters ab.
+    /// Represents an LED of the robot.
     /// </summary>
     public class Led
     {
-
-        #region members
         private Leds led;
         private DigitalOut digitalOut;
         private bool oldState;
-        #endregion
 
-
-        #region eventhandler
         public event EventHandler<LedEventArgs> LedStateChanged;
-        #endregion
-
-
-        #region constructor & destructor
+        
         /// <summary>
-        /// Initialisiert die gewünschte LED und verknüpft sie mit einem digitalOut-Objekt.
+        /// Initialise a new LED
         /// </summary>
-        /// <param name="digitalOut"></param>
-        /// <param name="led"></param>
+        /// <param name="digitalOut">Used digitalOut object</param>
+        /// <param name="led">the LED to control</param>
         public Led(DigitalOut digitalOut, Leds led)
         {
             this.digitalOut = digitalOut;
@@ -52,29 +35,22 @@ namespace RobotCtrl
             this.oldState = false;
             this.digitalOut.DigitalOutputChanged += new EventHandler(DigitalOutputChanged);
         }
-        #endregion
 
-
-        #region properties
         /// <summary>
-        /// Liefert bzw. setzt den Zustand der LED beim digitalOut-Objekt (ein-/ausgeschaltet)
+        /// Current state of the LED (on/off)
         /// </summary>
         public bool LedEnabled
         {
             get { return this.digitalOut[(int)led]; }
             set { this.digitalOut[(int)led] = value; }
         }
-        #endregion
 
-
-        #region methods
         /// <summary>
-        /// Dieser Eventhandler wird aufgerufen, sobald sich ein Ausgang (DigitalOut) ändert und
-        /// führt dazu, dass die LED entsprechend ein-/ausgeschaltet wrid.
+        /// Event to notify the change of the LED state.
         /// </summary>
         /// 
         /// <param name="sender">DigitalOut</param>
-        /// <param name="e"></param>
+        /// <param name="e">event args</param>
         private void DigitalOutputChanged(object sender, EventArgs e)
         {
             bool newState = this.digitalOut[(int)led];
@@ -87,8 +63,7 @@ namespace RobotCtrl
 
 
         /// <summary>
-        /// Diese Methode informiert alle registrierten Eventhandler über den Zustandswechsel 
-        /// (ein-/ausgeschaltet) der LED.
+        /// Notify all event handlers that the LED state has changed.
         /// </summary>
         public void OnLedStateChanged(LedEventArgs e)
         {
@@ -97,7 +72,6 @@ namespace RobotCtrl
                 LedStateChanged(this, e);
             }
         }
-        #endregion
 
     }
 }

@@ -1,55 +1,39 @@
-﻿//------------------------------------------------------------------------------
-// C #   I N   A C T I O N   ( C S A )
-//------------------------------------------------------------------------------
-// Repository:
-//    $Id: DigitalOut.cs 1024 2016-10-11 12:06:49Z chj-hslu $
-//------------------------------------------------------------------------------
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using RobotControl;
 
 namespace RobotCtrl
 {
 
     /// <summary>
-    /// Mit Hilfe diese Klasse kann auf die 4 Ausgänge (Led's) des Roboters zugegeriffen werden.
+    /// Output class to talk to all LEDs of the robot.
     /// </summary>
     public class DigitalOut
     {
-
-        #region members
         private int data;
         public event EventHandler DigitalOutputChanged;
-        #endregion
-
-
-        #region constructor & destructor
+        
         /// <summary>
-        /// Initialisiert die Ausgänge auf 0 und schreibt diese Information auch zum Roboter
+        /// Initialise the digital out and set the value to 0.
         /// </summary>
-        /// 
-        /// <param name="port">der IO-Port für den Zugriff auf die Ausgänge</param>
+        /// <param name="port">the IO-Port of the robot</param>
         public DigitalOut(int port)
         {
             Port = port;
             data = 0;
         }
-        #endregion
-
-
-        #region properties
+        
         /// <summary>
-        /// Liefert bzw. setzt den IO-Port für den Zugriff auf die Ausgänge des Roboters.
+        /// The used IO-Port.
         /// </summary>
         public int Port { get; set; }
 
-
         /// <summary>
-        /// Schreibt die übergebenen Daten auf den Port des Roboters falls sie sich
-        /// geändert haben und informiert die registrierten Handler über das Event
-        /// DigitalOutputChanged.
+        /// The data of the LEDs. This property is used to set or read the LEDs all together.
+        /// The rule is:
+        ///  Bit 0 = LED1
+        ///  Bit 1 = LED2
+        ///  Bit 2 = LED3
+        ///  Bit 3 = LED4
         /// </summary>
         public int Data
         {
@@ -70,14 +54,11 @@ namespace RobotCtrl
                 }
             }
         }
-        #endregion
-
-
-        #region methods
+        
         /// <summary>
-        /// Mit Hilfe dieser Methode wird das Event DigitalOutputChanged generiert.
+        /// Call the digital output changed event handlers.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">event args</param>
         protected void OnDigitalOutputChanged(EventArgs e)
         {
             if (DigitalOutputChanged != null)
@@ -88,22 +69,21 @@ namespace RobotCtrl
 
 
         /// <summary>
-        /// Indexierter Zugriff auf die einzelnen Bits des Properties Data.
+        /// Access a single bit of the output.
         /// </summary>
         /// 
-        /// <param name="bit">das gewünschte Bit [0..3]</param>
-        /// <returns>den aktuellen Zustand des Bits</returns>
+        /// <param name="bit">index of the bit to access [0..3]</param>
+        /// <returns>TRUE if the bit is 1, FALSE if the bit is 0</returns>
         public virtual bool this[int bit]
         {
             get
             {
-                return RobotHelper.GetBitFromInteger(data, bit); /* ToDo */
+                return RobotHelper.GetBitFromInteger(data, bit);
             }
             set
             {
                 this.data = RobotHelper.SetBitOfInteger(data, bit, value);
             }
         }
-        #endregion
     }
 }

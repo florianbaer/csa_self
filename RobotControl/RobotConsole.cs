@@ -1,42 +1,25 @@
-﻿//------------------------------------------------------------------------------
-// C #   I N   A C T I O N   ( C S A )
-//------------------------------------------------------------------------------
-// Repository:
-//    $Id: RobotConsole.cs 1039 2016-10-25 11:56:45Z chj-hslu $
-//------------------------------------------------------------------------------
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace RobotCtrl
 {
 
     /// <summary>
-    /// Bildet die Konsole des Roboters ab, die aus den LED's und Schaltern besteht.
+    /// Represents the console of the robot, containing multiple LEDs and switches.
     /// </summary>
     public class RobotConsole : IDisposable
     {
-
-        #region members
         private Led[] leds;
         private Switch[] switches;
         private DigitalIn digitalIn;
         private DigitalOut digitalOut;
-        #endregion
-
-
-        #region constructor & destructor
+        
         /// <summary>
-        /// Initialisiert die Roboter-Konsole mit den dazugehörigen LED's und Schalter.
+        /// Initialise the robot console with all LEDs/Switches.
         /// </summary>
-        /// 
-        /// <param name="runMode">Der gewünschte RunMode (Simulation oder Roboter)</param>
         public RobotConsole()
         {
             digitalIn = new DigitalIn(Constants.IOConsoleSWITCH);
             digitalOut = new DigitalOut(Constants.IOConsoleLED);
-
 
             this.leds = new Led[4];
             for (int i = 0; i < this.leds.Length; i++)
@@ -51,36 +34,30 @@ namespace RobotCtrl
             }
         }
 
-
         public void Dispose()
         {
             digitalIn.Dispose();
             //digitalOut.Dispose();
         }
-        #endregion
 
-
-        #region methods
         /// <summary>
-        /// Zugriff auf die LED per Indexer
+        /// Get the LED of a given index.
         /// </summary>
-        /// <param name="led"></param>
-        /// <returns></returns>
+        /// <param name="led">the enum value of the LED to return</param>
+        /// <returns>the LED object</returns>
         public Led this[Leds led]
         {
             get { return this.leds[(int)led]; }
         }
 
-
         /// <summary>
-        /// Zugriff auf die Schalter per Indexer
+        /// Get the switch of a given index.
         /// </summary>
-        /// <param name="swi"></param>
+        /// <param name="swi">the enum value of the switch to return</param>
         /// <returns></returns>
         public Switch this[Switches swi]
         {
             get { return this.switches[(int)swi]; }
         }
-        #endregion
     }
 }

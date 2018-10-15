@@ -1,36 +1,22 @@
-﻿//------------------------------------------------------------------------------
-// C #   I N   A C T I O N   ( C S A )
-//------------------------------------------------------------------------------
-// Repository:
-//    $Id: IOPort.cs 1027 2016-10-11 12:15:12Z chj-hslu $
-//------------------------------------------------------------------------------
-#define USE_EXTERNAL_DLL
+﻿#define USE_EXTERNAL_DLL
+
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RobotCtrl
 {
 
     /// <summary>
-    /// Klasse für den Hardware-Zugriff auf den Roboter.
+    /// This class abstracts the access to the io memory of the robot.
     /// </summary>
 	public static class IOPort
     {
-
 #if USE_EXTERNAL_DLL
-
-        #region members
         private static MethodInfo writeMethod;
         private static MethodInfo readMethod;
-        #endregion
-
-
-        #region constructor & destructor
+        
         static IOPort()
         {
             try
@@ -46,15 +32,12 @@ namespace RobotCtrl
                     "RobotIO.dll nicht gefunden!", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
             }
         }
-        #endregion
 
-
-        #region methods
         /// <summary>
-        /// Schreibt ein Byte auf eine Port-Adresse
+        /// Write a given byte to a specific memory location of the robot.
         /// </summary>
-        /// <param name="port">die gewünschte Port-Adresse (16 Bit)</param>
-        /// <param name="data">das gewünschte Datenbyte</param>
+        /// <param name="port">the address of the port to write (16 bit)</param>
+        /// <param name="data">the data to write</param>
         public static void Write(int port, int data)
         {
             writeMethod.Invoke(null, new object[] { port, data });
@@ -62,24 +45,22 @@ namespace RobotCtrl
 
 
         /// <summary>
-        /// Liest ein Byte von einer Port-Adresse
+        /// Read a byte from a given memory location of the robot.
         /// </summary>
-        /// <param name="port">die gewünschte Port-Adresse (16 Bit)</param>
-        /// <returns>das gelesene Byte</returns>
+        /// <param name="port">the address of the port to read (16 bit)</param>
+        /// <returns>the data from the memory</returns>
         public static int Read(int port)
         {
             return (int)readMethod.Invoke(null, new object[] { port });
         }
-        #endregion
 
 #else
 
-        #region methods
         /// <summary>
-        /// Schreibt ein Byte auf eine Port-Adresse
+        /// Write a given byte to a specific memory location of the robot.
         /// </summary>
-        /// <param name="port">die gewünschte Port-Adresse (16 Bit)</param>
-        /// <param name="data">das gewünschte Datenbyte</param>
+        /// <param name="port">the address of the port to write (16 bit)</param>
+        /// <param name="data">the data to write</param>
         public static void Write(int port, int data)
         {
             WriteByte((ushort)port, (byte)data);
@@ -88,8 +69,8 @@ namespace RobotCtrl
         /// <summary>
         /// Liest ein Byte von einer Port-Adresse
         /// </summary>
-        /// <param name="port">die gewünschte Port-Adresse (16 Bit)</param>
-        /// <returns>das gelesene Byte</returns>
+        /// <param name="port">the address of the port to read (16 bit)</param>
+        /// <returns>the data from the memory</returns>
         public static int Read(int port)
         {
             return ReadByte((ushort)port);
@@ -100,7 +81,7 @@ namespace RobotCtrl
 
         [DllImport("CEDDK.dll", EntryPoint = "READ_PORT_UCHAR", CharSet = CharSet.Auto)]
         private static extern byte ReadByte(ushort Addr);
-        #endregion
+
 #endif
     }
 }

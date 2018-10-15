@@ -1,13 +1,4 @@
-﻿//------------------------------------------------------------------------------
-// C #   I N   A C T I O N   ( C S A )
-//------------------------------------------------------------------------------
-// Repository:
-//    $Id: Constants.cs 1027 2016-10-11 12:15:12Z chj-hslu $
-//------------------------------------------------------------------------------
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace RobotCtrl
 {
