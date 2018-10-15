@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using RobotControl;
 
 namespace RobotCtrl
 {
@@ -54,8 +55,19 @@ namespace RobotCtrl
         {
             get { return data; }
             set 
-            { 
-                // Todo 
+            {
+                int oldValue = this.data;
+                this.data = value;
+                IOPort.Write(Port, data);
+                for (int i = 0; i < 4; i++)
+                {
+                    bool oldBit = RobotHelper.GetBitFromInteger(oldValue, i);
+                    bool newBit = RobotHelper.GetBitFromInteger(value, i);
+                    if (oldBit != newBit)
+                    {
+                        this.DigitalOutputChanged(this, new LedEventArgs((Leds)i, newBit));
+                    }
+                }
             }
         }
         #endregion
@@ -83,8 +95,14 @@ namespace RobotCtrl
         /// <returns>den aktuellen Zustand des Bits</returns>
         public virtual bool this[int bit]
         {
-            get { return false; /* ToDo */  }
-            set { /* ToDo */ }
+            get
+            {
+                return RobotHelper.GetBitFromInteger(data, bit); /* ToDo */
+            }
+            set
+            {
+                this.data = RobotHelper.SetBitOfInteger(data, bit, value);
+            }
         }
         #endregion
     }

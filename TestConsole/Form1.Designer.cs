@@ -1,4 +1,6 @@
-﻿namespace TestConsole
+﻿using RobotView;
+
+namespace TestConsole
 {
     partial class Form1
     {
@@ -30,14 +32,34 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.Menu = this.mainMenu1;
-            this.components = new System.ComponentModel.Container();
+            this.consoleView = new RobotView.ConsoleView();
+            this.SuspendLayout();
+            // 
+            // consoleView
+            // 
+            this.consoleView.BackColor = System.Drawing.Color.Black;
+            this.consoleView.Location = new System.Drawing.Point(14, 15);
+            this.consoleView.Name = "consoleView";
+            this.consoleView.RobotConsole = null;
+            this.consoleView.Size = new System.Drawing.Size(469, 98);
+            this.consoleView.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Text = "Form1";
             this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(503, 129);
+            this.Controls.Add(this.consoleView);
+            this.Menu = this.mainMenu1;
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+        private ConsoleView consoleView;
     }
 }
 

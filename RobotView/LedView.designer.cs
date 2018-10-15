@@ -28,22 +28,22 @@ namespace RobotView
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LedView));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.statePictureBox = new System.Windows.Forms.PictureBox();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // statePictureBox
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.statePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("statePictureBox.Image")));
+            this.statePictureBox.Location = new System.Drawing.Point(0, 0);
+            this.statePictureBox.Name = "statePictureBox";
+            this.statePictureBox.Size = new System.Drawing.Size(20, 20);
             // 
             // LedView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.statePictureBox);
             this.Name = "LedView";
             this.Size = new System.Drawing.Size(20, 20);
             this.ResumeLayout(false);
@@ -52,6 +52,6 @@ namespace RobotView
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox statePictureBox;
     }
 }

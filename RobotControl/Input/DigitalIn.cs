@@ -9,6 +9,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using RobotControl;
 
 namespace RobotCtrl
 {
@@ -69,7 +70,10 @@ namespace RobotCtrl
         /// </summary>
         public int Data
         {
-            get { return 0; /* ToDo */}
+            get
+            {
+                return IOPort.Read(Port);
+            }
         }
         #endregion
 
@@ -95,7 +99,10 @@ namespace RobotCtrl
         /// <returns>den Zustand des entsprechenden Input-Bits.</returns>
         public virtual bool this[int bit]
         {
-            get { return false; /* ToDo */ }
+            get
+            {
+                return RobotHelper.GetBitFromInteger(this.Data, bit);
+            }
         }
 
         /// <summary>
@@ -109,10 +116,21 @@ namespace RobotCtrl
             run = true;
             while (run)
             {
-                // Todo: Port des Roboters pollen.
-                // Falls eine Änderung detektiert wird, das Event DigitalInChanged feuern.
+                newData = this.Data;
+                if (oldData != newData)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        bool oldBit = RobotHelper.GetBitFromInteger(oldData, i);
+                        bool newBit = RobotHelper.GetBitFromInteger(newData, i);
+                        if (oldBit != newBit)
+                        {
+                            this.DigitalInChanged(this, new SwitchEventArgs((Switches)i, newBit));
+                        }
+                    }
+                }
 
-
+                oldData = newData;
                 Thread.Sleep(50);
             }
         }

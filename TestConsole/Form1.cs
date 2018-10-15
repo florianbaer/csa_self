@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotCtrl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace TestConsole
         public Form1()
         {
             InitializeComponent();
+            this.consoleView.RobotConsole = new RobotConsole();
         }
     }
 }
