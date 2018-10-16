@@ -3,30 +3,30 @@
 namespace RobotCtrl
 {
     /// <summary>
-    /// EventArgs data object used by the <see cref="Led"/>
+    /// EventArgs data object used by the <see cref="LedPin"/>
     /// </summary>
     public class LedEventArgs : EventArgs
     {
         /// <summary>
-        /// Initialise the LedEventArgs.
+        /// Initialize the LedEventArgs.
         /// </summary>
-        /// <param name="led">the LED that got changed</param>
-        /// <param name="ledEnabled">state of the LED</param>
-        public LedEventArgs(Leds led, bool ledEnabled)
+        /// <param name="ledPin">the LEDPin that got changed</param>
+        /// <param name="ledEnabled">state of the LEDPin</param>
+        public LedEventArgs(LEDPin ledPin, bool ledEnabled)
         {
-            Led = led;
+            LedPin = ledPin;
             LedEnabled = ledEnabled;
         }
         
         /// <summary>
-        /// The state of the LED (on/off).
+        /// The state of the LEDPin (on/off).
         /// </summary>
         public bool LedEnabled { get; set; }
 
         /// <summary>
-        /// The LED of the event.
+        /// The LEDPin of the event.
         /// </summary>
-        public Leds Led { get; set; }
+        public LEDPin LedPin { get; set; }
 
     }
 }

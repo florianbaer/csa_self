@@ -3,20 +3,20 @@
     public class IOPortEx
     {
         /// <summary>
-        /// Schreibt ein Byte auf eine Port-Adresse
+        /// Writes a byte on a port address.
         /// </summary>
-        /// <param name="port">die gewünschte Port-Adresse (16 Bit)</param>
-        /// <param name="data">das gewünschte Datenbyte</param>
+        /// <param name="port">The port address (16 Bit)</param>
+        /// <param name="data">The byte to write</param>
         public static void Write(int port, int data)
         {
             GPIOPort.WritePort(port, data);
         }
 
         /// <summary>
-        /// Liest ein Byte von einer Port-Adresse
+        /// Reads a byte from a given port.
         /// </summary>
-        /// <param name="port">die gewünschte Port-Adresse (16 Bit)</param>
-        /// <returns>das gelesene Byte</returns>
+        /// <param name="port">The given port (16 Bit)</param>
+        /// <returns>The read byte</returns>
         public static int Read(int port)
         {
             return GPIOPort.ReadPort(port);

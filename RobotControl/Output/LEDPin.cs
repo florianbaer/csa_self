@@ -3,7 +3,7 @@
 namespace RobotCtrl
 {
 
-    public enum Leds
+    public enum LEDPin
     {
         Led1 = 0,
         Led2,
@@ -13,63 +13,63 @@ namespace RobotCtrl
 
 
     /// <summary>
-    /// Represents an LED of the robot.
+    /// Represents an Led of the robot.
     /// </summary>
     public class Led
     {
-        private Leds led;
+        private LEDPin ledPin;
         private DigitalOut digitalOut;
         private bool oldState;
 
         public event EventHandler<LedEventArgs> LedStateChanged;
         
         /// <summary>
-        /// Initialise a new LED
+        /// Initialise a new LEDPin
         /// </summary>
         /// <param name="digitalOut">Used digitalOut object</param>
-        /// <param name="led">the LED to control</param>
-        public Led(DigitalOut digitalOut, Leds led)
+        /// <param name="ledPin">the LEDPin to control</param>
+        public Led(DigitalOut digitalOut, LEDPin ledPin)
         {
             this.digitalOut = digitalOut;
-            this.led = led;
+            this.ledPin = ledPin;
             this.oldState = false;
-            this.digitalOut.DigitalOutputChanged += new EventHandler(DigitalOutputChanged);
+            this.digitalOut.DigitalOutputChanged += DigitalOutputChanged;
         }
 
         /// <summary>
-        /// Current state of the LED (on/off)
+        /// Current state of the LEDPin (on/off)
         /// </summary>
         public bool LedEnabled
         {
-            get { return this.digitalOut[(int)led]; }
-            set { this.digitalOut[(int)led] = value; }
+            get { return this.digitalOut[(int)ledPin]; }
+            set { this.digitalOut[(int)ledPin] = value; }
         }
 
         /// <summary>
-        /// Event to notify the change of the LED state.
+        /// Event to notify the change of the LEDPin state.
         /// </summary>
         /// 
         /// <param name="sender">DigitalOut</param>
         /// <param name="e">event args</param>
         private void DigitalOutputChanged(object sender, EventArgs e)
         {
-            bool newState = this.digitalOut[(int)led];
+            bool newState = this.digitalOut[(int)ledPin];
             if (oldState != newState)
             {
-                OnLedStateChanged(new LedEventArgs(this.led, newState));
+                OnLedStateChanged(new LedEventArgs(this.ledPin, newState));
                 oldState = newState;
             }
         }
 
 
         /// <summary>
-        /// Notify all event handlers that the LED state has changed.
+        /// Notify all event handlers that the LEDPin state has changed.
         /// </summary>
-        public void OnLedStateChanged(LedEventArgs e)
+        public void OnLedStateChanged(LedEventArgs ledEventArgs)
         {
             if (LedStateChanged != null)
             {
-                LedStateChanged(this, e);
+                LedStateChanged(this, ledEventArgs);
             }
         }
 

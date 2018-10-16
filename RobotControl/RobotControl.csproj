@@ -48,7 +48,7 @@
     <Compile Include="Input\SwitchEventArgs.cs" />
     <Compile Include="IOPort.cs" />
     <Compile Include="Output\DigitalOut.cs" />
-    <Compile Include="Output\Led.cs" />
+    <Compile Include="Output\LEDPin.cs" />
     <Compile Include="Output\LedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RobotConsole.cs" />
