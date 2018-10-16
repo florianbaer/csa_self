@@ -30,11 +30,10 @@ namespace RobotView
                 this.switchView2.SwitchComponent = this.robotConsole[Switches.Switch2];
                 this.switchView3.SwitchComponent = this.robotConsole[Switches.Switch3];
                 this.switchView4.SwitchComponent = this.robotConsole[Switches.Switch4];
-                this.switchView1.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView1.OnLedStateChanged);
-                this.switchView2.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView2.OnLedStateChanged);
-                this.switchView3.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView3.OnLedStateChanged);
-                this.switchView4.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView4.OnLedStateChanged);
-                //this.switchView4.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView4.LedComponent.OnLedStateChanged);
+                this.RobotConsole[Switches.Switch1].SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView1.OnSwitchStateChanged);
+                this.RobotConsole[Switches.Switch2].SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView2.OnSwitchStateChanged);
+                this.RobotConsole[Switches.Switch3].SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView3.OnSwitchStateChanged);
+                this.RobotConsole[Switches.Switch4].SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView4.OnSwitchStateChanged);
             }
         }
 

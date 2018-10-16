@@ -36,7 +36,7 @@ namespace RobotView
             set
             {
                 this.ledComponent = value;
-                //this.ledComponent.LedStateChanged += this.OnLedStateChanged;
+                this.ledComponent.LedStateChanged += new  EventHandler<LedEventArgs>(this.OnLedStateChanged);
             }
         }
 
@@ -67,9 +67,14 @@ namespace RobotView
             }
         }
 
-        public void OnLedStateChanged(object sender, SwitchEventArgs e)
+        public void OnLedStateChanged(object sender, LedEventArgs e)
         {
-            this.State = !this.State;
+            this.LedComponent.LedEnabled = e.LedEnabled;
+        }
+
+        public void OnSwitchStateChanged(object sender, SwitchEventArgs e)
+        {
+            this.State = e.SwitchEnabled;
         }
     }
 }
