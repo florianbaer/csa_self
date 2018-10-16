@@ -49,7 +49,7 @@ namespace RobotCtrl
                     bool newBit = RobotHelper.GetBitFromInteger(value, i);
                     if (oldBit != newBit)
                     {
-                        this.DigitalOutputChanged(this, new LedEventArgs((Leds)i, newBit));
+                        this.DigitalOutputChanged(this, new LedEventArgs((LEDPin)i, newBit));
                     }
                 }
             }

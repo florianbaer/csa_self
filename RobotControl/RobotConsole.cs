@@ -24,7 +24,7 @@ namespace RobotCtrl
             this.leds = new Led[4];
             for (int i = 0; i < this.leds.Length; i++)
             {
-                leds[i] = new Led(digitalOut, (Leds)i);
+                leds[i] = new Led(digitalOut, (LEDPin)i);
             }
 
             this.switches = new Switch[4];
@@ -41,13 +41,13 @@ namespace RobotCtrl
         }
 
         /// <summary>
-        /// Get the LED of a given index.
+        /// Get the LEDPin of a given index.
         /// </summary>
-        /// <param name="led">the enum value of the LED to return</param>
-        /// <returns>the LED object</returns>
-        public Led this[Leds led]
+        /// <param name="ledPin">the enum value of the LEDPin to return</param>
+        /// <returns>the LEDPin object</returns>
+        public Led this[LEDPin ledPin]
         {
-            get { return this.leds[(int)led]; }
+            get { return this.leds[(int)ledPin]; }
         }
 
         /// <summary>
