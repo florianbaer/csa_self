@@ -23,7 +23,7 @@ namespace RobotView
             set
             {
                 this.state = value;
-                this.RefreshImageView();
+                this.RefreshImageView();       
             }
         }
 
@@ -36,7 +36,7 @@ namespace RobotView
             set
             {
                 this.ledComponent = value;
-                this.ledComponent.LedStateChanged += this.OnLedStateChanged;
+                //this.ledComponent.LedStateChanged += this.OnLedStateChanged;
             }
         }
 
@@ -45,7 +45,7 @@ namespace RobotView
             InitializeComponent();
         }
 
-        public void RefreshImageView()
+        public void ChangeImageEvent()
         {
             if (this.state)
             {
@@ -57,9 +57,19 @@ namespace RobotView
             }
         }
 
-        private void OnLedStateChanged(object sender, LedEventArgs e)
+        private delegate void ChangeImage();
+
+        public void RefreshImageView()
         {
-            this.State = e.LedEnabled;
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new ChangeImage(ChangeImageEvent));
+            }
+        }
+
+        public void OnLedStateChanged(object sender, SwitchEventArgs e)
+        {
+            this.State = !this.State;
         }
     }
 }

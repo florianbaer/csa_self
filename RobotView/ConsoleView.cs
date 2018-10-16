@@ -30,8 +30,14 @@ namespace RobotView
                 this.switchView2.SwitchComponent = this.robotConsole[Switches.Switch2];
                 this.switchView3.SwitchComponent = this.robotConsole[Switches.Switch3];
                 this.switchView4.SwitchComponent = this.robotConsole[Switches.Switch4];
+                this.switchView1.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView1.OnLedStateChanged);
+                this.switchView2.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView2.OnLedStateChanged);
+                this.switchView3.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView3.OnLedStateChanged);
+                this.switchView4.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView4.OnLedStateChanged);
+                //this.switchView4.SwitchComponent.SwitchStateChanged += new EventHandler<SwitchEventArgs>(this.ledView4.LedComponent.OnLedStateChanged);
             }
         }
+
         public ConsoleView()
         {
             InitializeComponent();

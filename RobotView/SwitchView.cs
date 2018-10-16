@@ -45,27 +45,31 @@ namespace RobotView
             InitializeComponent();
         }
 
-        public void RefreshImageView()
-        {
+
+        public void ChangeImageEvent(){
             if (this.state)
             {
-                statePictureBox.Image = Images.SwitchOn;
+                this.statePictureBox.Image = Images.SwitchOn;
             }
             else
             {
                 statePictureBox.Image = Images.SwitchOff;
             }
-            
+        }
+
+        private delegate void ChangeImage();
+
+        public void RefreshImageView()
+        {
+            if (this.InvokeRequired)
+            {                
+                this.Invoke(new ChangeImage(ChangeImageEvent));
+            }            
         }
 
         private void OnSwitchStateChanged(object sender, SwitchEventArgs e)
         {
             this.State = e.SwitchEnabled;
-        }
-
-        private void statePictureBox_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

@@ -38,7 +38,6 @@ namespace RobotView
             this.statePictureBox.Location = new System.Drawing.Point(0, 0);
             this.statePictureBox.Name = "statePictureBox";
             this.statePictureBox.Size = new System.Drawing.Size(20, 40);
-            this.statePictureBox.Click += new System.EventHandler(this.statePictureBox_Click);
             // 
             // SwitchView
             // 
