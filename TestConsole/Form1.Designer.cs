@@ -8,7 +8,6 @@ namespace TestConsole
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -31,16 +30,19 @@ namespace TestConsole
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.consoleView = new RobotView.ConsoleView();
             this.SuspendLayout();
             // 
             // consoleView
             // 
+            this.consoleView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.consoleView.BackColor = System.Drawing.Color.Black;
             this.consoleView.Location = new System.Drawing.Point(14, 15);
             this.consoleView.Name = "consoleView";
-            this.consoleView.Size = new System.Drawing.Size(469, 98);
+            this.consoleView.RobotConsole = null;
+            this.consoleView.Size = new System.Drawing.Size(459, 97);
             this.consoleView.TabIndex = 1;
             // 
             // Form1
@@ -48,9 +50,8 @@ namespace TestConsole
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(503, 129);
+            this.ClientSize = new System.Drawing.Size(492, 136);
             this.Controls.Add(this.consoleView);
-            this.Menu = this.mainMenu1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
