@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotView", "RobotView\Robo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{9E22A150-743F-47B0-AE69-3DE9718CEF72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMotor", "TestMotor\TestMotor.csproj", "{8F7D9575-43E5-43D9-9EB9-328F0372A608}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,12 @@ Global
 		{9E22A150-743F-47B0-AE69-3DE9718CEF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E22A150-743F-47B0-AE69-3DE9718CEF72}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E22A150-743F-47B0-AE69-3DE9718CEF72}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8F7D9575-43E5-43D9-9EB9-328F0372A608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F7D9575-43E5-43D9-9EB9-328F0372A608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F7D9575-43E5-43D9-9EB9-328F0372A608}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8F7D9575-43E5-43D9-9EB9-328F0372A608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F7D9575-43E5-43D9-9EB9-328F0372A608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F7D9575-43E5-43D9-9EB9-328F0372A608}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
