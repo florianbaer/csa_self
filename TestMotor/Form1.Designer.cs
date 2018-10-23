@@ -32,35 +32,41 @@ namespace TestMotor
         /// </summary>
         private void InitializeComponent()
         {
+
+            this.driveCtrlView = new DriveCtrlView();
+            this.driveCtrlView.DriveCtrl = new DriveCtrl(Constants.IODriveCtrl);
+
+            this.motorCtrlViewLeft = new MotorCtrlView();
+            this.motorCtrlViewLeft.MotorCtrl = new MotorCtrl(Constants.IOMotorCtrlLeft);
+
+            this.motorCtrlViewRight = new MotorCtrlView();
+            this.motorCtrlViewRight.MotorCtrl = new MotorCtrl(Constants.IOMotorCtrlRight);
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.driveCtrlView1 = new RobotView.DriveCtrlView();
-            this.motorCtrlView1 = new RobotView.MotorCtrlView();
-            this.motorCtrlView2 = new RobotView.MotorCtrlView();
             this.SuspendLayout();
             // 
-            // driveCtrlView1
+            // driveCtrlView
             // 
-            this.driveCtrlView1.DriveCtrl = null;
-            this.driveCtrlView1.Location = new System.Drawing.Point(3, 3);
-            this.driveCtrlView1.Name = "driveCtrlView1";
-            this.driveCtrlView1.Size = new System.Drawing.Size(480, 93);
-            this.driveCtrlView1.TabIndex = 0;
+            this.driveCtrlView.DriveCtrl = null;
+            this.driveCtrlView.Location = new System.Drawing.Point(3, 3);
+            this.driveCtrlView.Name = "driveCtrlView";
+            this.driveCtrlView.Size = new System.Drawing.Size(480, 93);
+            this.driveCtrlView.TabIndex = 0;
             // 
-            // motorCtrlView1
+            // motorCtrlViewLeft
             // 
-            this.motorCtrlView1.Location = new System.Drawing.Point(3, 67);
-            this.motorCtrlView1.MotorCtrl = null;
-            this.motorCtrlView1.Name = "motorCtrlView1";
-            this.motorCtrlView1.Size = new System.Drawing.Size(480, 330);
-            this.motorCtrlView1.TabIndex = 1;
+            this.motorCtrlViewLeft.Location = new System.Drawing.Point(3, 67);
+            this.motorCtrlViewLeft.MotorCtrl = null;
+            this.motorCtrlViewLeft.Name = "motorCtrlViewLeft";
+            this.motorCtrlViewLeft.Size = new System.Drawing.Size(480, 330);
+            this.motorCtrlViewLeft.TabIndex = 1;
             // 
-            // motorCtrlView2
+            // motorCtrlViewRight
             // 
-            this.motorCtrlView2.Location = new System.Drawing.Point(487, 67);
-            this.motorCtrlView2.MotorCtrl = null;
-            this.motorCtrlView2.Name = "motorCtrlView2";
-            this.motorCtrlView2.Size = new System.Drawing.Size(480, 330);
-            this.motorCtrlView2.TabIndex = 2;
+            this.motorCtrlViewRight.Location = new System.Drawing.Point(487, 67);
+            this.motorCtrlViewRight.MotorCtrl = null;
+            this.motorCtrlViewRight.Name = "motorCtrlViewRight";
+            this.motorCtrlViewRight.Size = new System.Drawing.Size(480, 330);
+            this.motorCtrlViewRight.TabIndex = 2;
             // 
             // Form1
             // 
@@ -68,9 +74,9 @@ namespace TestMotor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(970, 455);
-            this.Controls.Add(this.motorCtrlView2);
-            this.Controls.Add(this.motorCtrlView1);
-            this.Controls.Add(this.driveCtrlView1);
+            this.Controls.Add(this.motorCtrlViewRight);
+            this.Controls.Add(this.motorCtrlViewLeft);
+            this.Controls.Add(this.driveCtrlView);
             this.Menu = this.mainMenu1;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -80,9 +86,9 @@ namespace TestMotor
 
         #endregion
 
-        private DriveCtrlView driveCtrlView1;
-        private MotorCtrlView motorCtrlView1;
-        private MotorCtrlView motorCtrlView2;
+        private DriveCtrlView driveCtrlView;
+        private MotorCtrlView motorCtrlViewLeft;
+        private MotorCtrlView motorCtrlViewRight;
     }
 }
 
