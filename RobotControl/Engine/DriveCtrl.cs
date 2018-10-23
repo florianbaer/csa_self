@@ -82,7 +82,11 @@ namespace RobotCtrl
         /// </summary>
         public void Reset()
         {
-            // ToDo
+            this.DriveState = 0x00;
+            Thread.Sleep(5);
+            this.DriveState = 0x80;
+            Thread.Sleep(5);
+            this.DriveState = 0x00;
         }
 
     }
