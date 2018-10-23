@@ -13,7 +13,7 @@ namespace RobotCtrl
 
 
     /// <summary>
-    /// Represents an Led of the robot.
+    /// Represents a Led of the robot.
     /// </summary>
     public class Led
     {

@@ -75,6 +75,7 @@ namespace RobotView
         public void OnSwitchStateChanged(object sender, SwitchEventArgs e)
         {
             this.State = e.SwitchEnabled;
+            this.LedComponent.LedEnabled = e.SwitchEnabled;
         }
     }
 }

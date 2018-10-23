@@ -82,7 +82,7 @@ namespace RobotCtrl
             }
             set
             {
-                this.data = RobotHelper.SetBitOfInteger(data, bit, value);
+                this.Data = RobotHelper.SetBitOfInteger(data, bit, value);
             }
         }
     }
