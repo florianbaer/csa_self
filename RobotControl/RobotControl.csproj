@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Engine\DriveCtrl.cs" />
+    <Compile Include="Engine\MotorCtrl.cs" />
     <Compile Include="Input\DigitalIn.cs" />
     <Compile Include="Input\Switch.cs" />
     <Compile Include="Input\SwitchEventArgs.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="RobotConsole.cs" />
     <Compile Include="RobotHelper.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkTargetsVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
