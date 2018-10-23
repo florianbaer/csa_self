@@ -9,19 +9,16 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using RobotControl;
 
 namespace RobotCtrl
 {
 
     public class DriveCtrl : IDisposable
     {
-
-        #region members
         private int ioAddress;
-        #endregion
-
-
-        #region constructor & destructor
+        
+        
         public DriveCtrl(int IOAddress)
         {
             this.ioAddress = IOAddress;
@@ -32,10 +29,8 @@ namespace RobotCtrl
         {
             Reset();
         }
-        #endregion
 
-
-        #region properties
+        
         /// <summary>
         /// Schaltet die Stromversorgung der beiden Motoren ein oder aus.
         /// </summary>
@@ -51,8 +46,11 @@ namespace RobotCtrl
         /// </summary>
         public bool PowerRight
         {
-            get { return false; } // ToDo
-            set { } // ToDo
+            get
+            {
+                return (this.DriveState & 0x01) != 0;
+            }
+            set { this.DriveState = value ? (this.DriveState | 0x01) : (this.DriveState & ~0x01); }
         }
 
 
@@ -61,8 +59,11 @@ namespace RobotCtrl
         /// </summary>
         public bool PowerLeft
         {
-            get { return false; } // ToDo
-            set { } // ToDo
+            get
+            {
+                return (this.DriveState & 0x02) != 0;
+            }
+            set { this.DriveState = value ? (this.DriveState | 0x02) : (this.DriveState & ~0x02); }
         }
 
 
@@ -71,13 +72,10 @@ namespace RobotCtrl
         /// </summary>
         public int DriveState
         {
-            get { return 0; } // ToDo
-            set { } // ToDo
+            get { return IOPort.Read(this.ioAddress); }
+            set { IOPort.Write(this.ioAddress, value); }
         }
-        #endregion
 
-
-        #region methods
         /// <summary>
         /// Setzt die beiden Motorencontroller (LM629) zurück, 
         /// indem kurz die Reset-Leitung aktiviert wird.
@@ -86,7 +84,6 @@ namespace RobotCtrl
         {
             // ToDo
         }
-        #endregion
 
     }
 }
