@@ -37,8 +37,7 @@ namespace RobotCtrl
         private static object syncObj = new object();
         #endregion
 
-
-        #region constructor & destructor
+        
         /// <summary>
         /// Initialisiert den Motorencontroller und setzt ihn dabei zurück (Reset)
         /// </summary>
@@ -52,10 +51,9 @@ namespace RobotCtrl
 
 
         public virtual void Dispose() { }
-        #endregion
+    
 
-
-        #region properties
+        
         /// <summary>
         /// Liefert bzw. setzt die Geschwindigkeit in [m/s]
         /// </summary>
@@ -158,7 +156,7 @@ namespace RobotCtrl
         /// </summary>
         public virtual float Distance
         {
-            get { throw new NotImplementedException("ToDo"); }
+            get { return this.Ticks * Constants.MeterPerTick; }
         }
 
 
@@ -170,10 +168,8 @@ namespace RobotCtrl
         {
             get { return (Status & 0x80) == 0x80; }
         }
-        #endregion
 
-
-        #region methods
+        
         /// <summary>
         /// Übernimmt die Einstellungen wie Geschwindigkeit oder Beschleunigung
         /// und führt sie aus.
@@ -259,10 +255,8 @@ namespace RobotCtrl
                 WriteCmd(UPDATE_FILTER);
             }
         }
-        #endregion
 
-
-        #region internal helper methods
+        
         /// <summary>
         /// Liefert true, falls der LM629 bereit ist, neue Befehle entgegen
         /// zu nehmen - ansonsten false.
@@ -351,7 +345,7 @@ namespace RobotCtrl
             val = (val << 16) | ReadShort();
             return val;
         }
-        #endregion
+        
 
     }
 }
