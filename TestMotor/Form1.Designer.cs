@@ -32,12 +32,15 @@ namespace TestMotor
         /// </summary>
         private void InitializeComponent()
         {
-      
+            this.driveCtrlView = new RobotView.DriveCtrlView();
+            this.motorCtrlViewLeft = new RobotView.MotorCtrlView();
+            this.motorCtrlViewRight = new RobotView.MotorCtrlView();
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.SuspendLayout();
             // 
             // driveCtrlView
             // 
+            this.driveCtrlView.DriveCtrl = null;
             this.driveCtrlView.Location = new System.Drawing.Point(3, 3);
             this.driveCtrlView.Name = "driveCtrlView";
             this.driveCtrlView.Size = new System.Drawing.Size(480, 93);
@@ -46,13 +49,15 @@ namespace TestMotor
             // motorCtrlViewLeft
             // 
             this.motorCtrlViewLeft.Location = new System.Drawing.Point(3, 67);
+            this.motorCtrlViewLeft.MotorCtrl = null;
             this.motorCtrlViewLeft.Name = "motorCtrlViewLeft";
             this.motorCtrlViewLeft.Size = new System.Drawing.Size(480, 330);
             this.motorCtrlViewLeft.TabIndex = 1;
             // 
             // motorCtrlViewRight
             // 
-            this.motorCtrlViewRight.Location = new System.Drawing.Point(487, 67);
+            this.motorCtrlViewRight.Location = new System.Drawing.Point(468, 69);
+            this.motorCtrlViewRight.MotorCtrl = null;
             this.motorCtrlViewRight.Name = "motorCtrlViewRight";
             this.motorCtrlViewRight.Size = new System.Drawing.Size(480, 330);
             this.motorCtrlViewRight.TabIndex = 2;
@@ -62,7 +67,7 @@ namespace TestMotor
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(970, 455);
+            this.ClientSize = new System.Drawing.Size(970, 402);
             this.Controls.Add(this.motorCtrlViewRight);
             this.Controls.Add(this.motorCtrlViewLeft);
             this.Controls.Add(this.driveCtrlView);
