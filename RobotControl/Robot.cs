@@ -48,7 +48,7 @@ namespace RobotCtrl
         {
             get { return this.robotConsole; }
         }
-
+        
 
         /// <summary>
         /// Liefert den Radar des Roboters

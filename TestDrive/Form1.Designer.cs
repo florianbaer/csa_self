@@ -39,7 +39,6 @@
             // 
             // driveView1
             // 
-            this.driveView1.Drive = null;
             this.driveView1.Location = new System.Drawing.Point(3, 3);
             this.driveView1.Name = "driveView1";
             this.driveView1.Size = new System.Drawing.Size(292, 289);
@@ -59,7 +58,6 @@
             // runLineView1
             // 
             this.runLineView1.Acceleration = 0F;
-            this.runLineView1.Drive = null;
             this.runLineView1.Location = new System.Drawing.Point(301, 23);
             this.runLineView1.Name = "runLineView1";
             this.runLineView1.Size = new System.Drawing.Size(404, 56);
@@ -69,7 +67,6 @@
             // runTurnView1
             // 
             this.runTurnView1.Acceleration = 0F;
-            this.runTurnView1.Drive = null;
             this.runTurnView1.Location = new System.Drawing.Point(302, 85);
             this.runTurnView1.Name = "runTurnView1";
             this.runTurnView1.Size = new System.Drawing.Size(403, 55);
@@ -79,7 +76,6 @@
             // runArcView1
             // 
             this.runArcView1.Acceleration = 0F;
-            this.runArcView1.Drive = null;
             this.runArcView1.Location = new System.Drawing.Point(301, 146);
             this.runArcView1.Name = "runArcView1";
             this.runArcView1.Size = new System.Drawing.Size(433, 107);
