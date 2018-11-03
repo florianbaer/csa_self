@@ -59,11 +59,8 @@ namespace RobotCtrl
         /// </summary>
         public bool PowerLeft
         {
-            get
-            {
-                return (this.DriveState & 0x02) != 0;
-            }
-            set { this.DriveState = value ? (this.DriveState | 0x02) : (this.DriveState & ~0x02); }
+            get { return (DriveState & 0x02) != 0; }
+            set { DriveState = (value) ? DriveState | 0x02 : DriveState & ~0x02; }
         }
 
 
@@ -72,8 +69,8 @@ namespace RobotCtrl
         /// </summary>
         public int DriveState
         {
-            get { return IOPort.Read(this.ioAddress); }
-            set { IOPort.Write(this.ioAddress, value); }
+            get { return IOPort.Read(ioAddress); }
+            protected set { IOPort.Write(ioAddress, value); }
         }
 
         /// <summary>
@@ -82,7 +79,11 @@ namespace RobotCtrl
         /// </summary>
         public void Reset()
         {
-            // ToDo
+            this.DriveState = 0x00;
+            Thread.Sleep(5);
+            this.DriveState = 0x80;
+            Thread.Sleep(5);
+            this.DriveState = 0x00;
         }
 
     }
