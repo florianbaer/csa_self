@@ -91,6 +91,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Images.resx</DependentUpon>
     </Compile>
+    <Compile Include="RadarView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RadarView.designer.cs">
+      <DependentUpon>RadarView.cs</DependentUpon>
+    </Compile>
     <Compile Include="RunArcView.cs">
       <SubType>usercontrol</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NumberKeyboard.resx">
       <DependentUpon>NumberKeyboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RadarView.resx">
+      <DependentUpon>RadarView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RunArcView.resx">
       <DependentUpon>RunArcView.cs</DependentUpon>

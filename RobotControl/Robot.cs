@@ -2,7 +2,7 @@
 // C #   I N   A C T I O N   ( C S A )
 //------------------------------------------------------------------------------
 // Repository:
-//    $Id: Robot.cs 828 2012-08-05 09:10:38Z zajost $
+//    $Id: Robot.cs 1039 2016-10-25 11:56:45Z chj-hslu $
 //------------------------------------------------------------------------------
 using System;
 using System.Linq;
@@ -16,16 +16,16 @@ namespace RobotCtrl
 
         #region members
         private RobotConsole robotConsole;
-        private Drive drive;
+        private Radar radar;
         #endregion
 
 
         #region constructor & destructor
         public Robot()
         {
-
             this.robotConsole = new RobotConsole();
-            this.drive = new Drive();
+            this.radar = new Radar(Constants.IORadarSensor);
+            Drive = new Drive();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace RobotCtrl
         /// </summary>
         public void Dispose()
         {
-            this.drive.Dispose();
+            Drive.Dispose();
             this.robotConsole.Dispose();
         }
         #endregion
@@ -51,18 +51,28 @@ namespace RobotCtrl
 
 
         /// <summary>
+        /// Liefert den Radar des Roboters
+        /// </summary>
+        public Radar Radar
+        {
+            get { return this.radar; }
+        }
+
+
+        /// <summary>
         /// Liefert den Antrieb des Roboters
         /// </summary>
         public Drive Drive
         {
-            get { return this.drive; }
+            get;
+            private set;
         }
 
 
         /// <summary>
         /// Liefert bzw. setzt die aktuelle Postion des Roboters.
         /// </summary>
-        public PositionInfo Position { get { return drive.Position; } set { drive.Position = value; } }
+        public PositionInfo Position { get { return Drive.Position; } set { Drive.Position = value; } }
         #endregion
     }
 }
