@@ -30,14 +30,34 @@
         private void InitializeComponent()
         {
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
-            this.Menu = this.mainMenu1;
-            this.components = new System.ComponentModel.Container();
+            this.radarView1 = new RobotView.RadarView();
+            this.SuspendLayout();
+            // 
+            // radarView1
+            // 
+            this.radarView1.Location = new System.Drawing.Point(3, 3);
+            this.radarView1.Name = "radarView1";
+            this.radarView1.Radar = null;
+            this.radarView1.Size = new System.Drawing.Size(565, 42);
+            this.radarView1.TabIndex = 0;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Text = "Form1";
             this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(574, 455);
+            this.Controls.Add(this.radarView1);
+            this.Menu = this.mainMenu1;
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private RobotView.RadarView radarView1;
     }
 }
 
