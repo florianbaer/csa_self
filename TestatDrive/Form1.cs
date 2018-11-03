@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using RobotCtrl;
 
@@ -23,7 +24,15 @@ namespace TestatDrive
 
         private void StartTestatRun(object sender, SwitchEventArgs e)
         {
-            throw new NotImplementedException();
+            Thread blinkThread = new Thread(new ThreadStart(LedBlinker));
+            blinkThread.Start();
+            
+            blinkThread.Abort();
+        }
+
+        private void LedBlinker()
+        {
+            new LEDBlinkerCommand().Execute(robot);
         }
     }
 }

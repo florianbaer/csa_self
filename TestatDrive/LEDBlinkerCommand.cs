@@ -18,6 +18,7 @@ namespace TestatDrive
                 {
                     robot.RobotConsole[(LEDPin) i].LedEnabled = !robot.RobotConsole[(LEDPin)i].LedEnabled;
                 }
+                Thread.Sleep(500);
             }
         }
     }
