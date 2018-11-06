@@ -10,15 +10,29 @@ namespace TestatDrive
 {
     public class LEDBlinkerCommand
     {
+        private int currentLed = 0;
+
+
         public void Execute(Robot robot)
         {
             while (Thread.CurrentThread.IsAlive)
             {
-                for(int i = 0; i<4; i++)
+                //for(int i = 0; i<4; i++)
+                //{
+                //    robot.RobotConsole[(LEDPin) i].LedEnabled = !robot.RobotConsole[(LEDPin)i].LedEnabled;
+                //}
+
+                robot.RobotConsole[(LEDPin)currentLed].LedEnabled = false;
+
+                currentLed++;
+                if(currentLed == 4)
                 {
-                    robot.RobotConsole[(LEDPin) i].LedEnabled = !robot.RobotConsole[(LEDPin)i].LedEnabled;
+                    currentLed = 0;
                 }
-                Thread.Sleep(500);
+
+                robot.RobotConsole[(LEDPin)currentLed].LedEnabled = true;
+
+                Thread.Sleep(100);
             }
         }
     }

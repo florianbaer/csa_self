@@ -14,6 +14,8 @@ namespace TestatDrive
     public partial class Form1 : Form
     {
         private Robot robot;
+        private int counter;
+
         public Form1()
         {
             InitializeComponent();
@@ -24,15 +26,56 @@ namespace TestatDrive
 
         private void StartTestatRun(object sender, SwitchEventArgs e)
         {
-            Thread blinkThread = new Thread(new ThreadStart(LedBlinker));
-            blinkThread.Start();
-            
-            blinkThread.Abort();
+            //Counter zurücksetzen
+            counter = 0;
+            tbAnzahlObjekte.Text = counter.ToString();
+
+            if (robot.Drive.Done)
+            {
+                //Threads starten
+                Thread blinkThread = new Thread(new ThreadStart(LedBlinker));
+                blinkThread.Start();
+
+                Thread obstacleThread = new Thread(new ThreadStart(ObstacleRecognizer));
+                obstacleThread.Start();
+
+                //Roboter starten
+                robot.Drive.RunLine(2.5f, commonRunParameters1.Speed, commonRunParameters1.Acceleration);
+                while (!robot.Drive.Done) ;
+                robot.Drive.RunTurn(180, commonRunParameters1.Speed, commonRunParameters1.Acceleration);
+                while (!robot.Drive.Done) ;
+                robot.Drive.RunLine(2.5f, commonRunParameters1.Speed, commonRunParameters1.Acceleration);
+                while (!robot.Drive.Done) ;
+                robot.Drive.RunTurn(180, commonRunParameters1.Speed, commonRunParameters1.Acceleration);
+
+                //Threads beenden
+                blinkThread.Abort();
+                obstacleThread.Abort();
+
+                //Alle 4 LEDs leuchten zum Schluss
+                for (int i = 0; i < 4; i++)
+                {
+                    robot.RobotConsole[(LEDPin)i].LedEnabled = true;
+                }
+            }
         }
 
         private void LedBlinker()
         {
             new LEDBlinkerCommand().Execute(robot);
+        }
+
+        private void ObstacleRecognizer()
+        {
+            ObstacleRecognizer or = new ObstacleRecognizer();
+            or.obstacleDetectedEvent += new EventHandler<EventArgs>(ObstacleDetected);
+            or.Execute(robot);
+        }
+
+        private void ObstacleDetected(object sender, EventArgs e)
+        {
+            counter++;
+            tbAnzahlObjekte.Text = counter.ToString();
         }
     }
 }
