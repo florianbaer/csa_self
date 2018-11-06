@@ -17,14 +17,14 @@ namespace TestatDrive
             while (Thread.CurrentThread.IsAlive)
             {
                 float currentDistance = robot.Radar.Distance;
-                if (currentDistance < 1.0f && previousDistance >= 1.0f)
+                if (currentDistance < 0.8f && previousDistance >= 0.8f)
                 {
                     //Event 
                     obstacleDetectedEvent?.Invoke(this, new EventArgs());
                 }
                 previousDistance = currentDistance;
 
-                Thread.Sleep(50);
+                Thread.Sleep(200);
             }
         }
     }

@@ -32,7 +32,7 @@ namespace TestatDrive
 
                 robot.RobotConsole[(LEDPin)currentLed].LedEnabled = true;
 
-                Thread.Sleep(100);
+                Thread.Sleep(200);
             }
         }
     }
