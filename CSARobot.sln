@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestatDrive", "TestatDrive\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestatServer", "TestatServer\TestatServer.csproj", "{EE863E7F-23D7-4C32-A788-43D00420EB29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSA_Webservice", "CSA_Webservice\CSA_Webservice.csproj", "{0DB6A00D-B7D9-48C4-9541-4970BCD758B0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,10 +73,6 @@ Global
 		{EE863E7F-23D7-4C32-A788-43D00420EB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE863E7F-23D7-4C32-A788-43D00420EB29}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE863E7F-23D7-4C32-A788-43D00420EB29}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{0DB6A00D-B7D9-48C4-9541-4970BCD758B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DB6A00D-B7D9-48C4-9541-4970BCD758B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0DB6A00D-B7D9-48C4-9541-4970BCD758B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DB6A00D-B7D9-48C4-9541-4970BCD758B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

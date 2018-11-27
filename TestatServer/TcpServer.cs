@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotCtrl;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -59,7 +60,7 @@ namespace TestatServer
 
             if (request.StartsWith("TrackLine"))
             {
-                rc = new TrackTurnCommand();
+                rc = new TrackLineRunCommand(1f);
             }
             else if(request.StartsWith("Start"))
             {

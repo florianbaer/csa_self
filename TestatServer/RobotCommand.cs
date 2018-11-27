@@ -1,55 +1,80 @@
-﻿using System;
+﻿using RobotCtrl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace TestatServer
 {
-    public interface RobotCommand
+    public abstract class RobotCommand
     {
-        void Execute();
-        
+        protected float Speed = 0.5f;
+        protected float Acceleration = 0.3f;
+
+        public abstract void Execute(Robot robot);        
     }
 
     public class TrackLineRunCommand : RobotCommand
     {
-        public double Length { get; set; }
+        public float Length { get; set; }
 
-        public void Execute()
+        public TrackLineRunCommand(float length)
         {
-            throw new NotImplementedException();
+            Length = length;
+        }
+
+        public override void Execute(Robot robot)
+        {
+            robot.Drive.RunLine(Length, Speed, Acceleration);
         }
     }
 
     public class TrackTurnCommand : RobotCommand
     {
-        public double Radius { get; set; }
+        public float Angle { get; set; }
 
-        public void Execute()
+        public TrackTurnCommand(float angle)
         {
-            throw new NotImplementedException();
+            Angle = angle;
+        }
+
+        public override void Execute(Robot robot)
+        {
+            robot.Drive.RunTurn(Angle, Speed, Acceleration);
         }
     }
 
     public class TrackArcRightCommand : RobotCommand
     {
-        public double Radius { get; set; }
-        public double Angle { get; set; }
+        public float Radius { get; set; }
+        public float Angle { get; set; }
 
-        public void Execute()
+        public TrackArcRightCommand(float radius, float angle)
         {
-            throw new NotImplementedException();
+            Radius = radius;
+            Angle = angle;
+        }
+
+        public override void Execute(Robot robot)
+        {
+            robot.Drive.RunArcRight(Radius, Angle, Speed, Acceleration);
         }
     }
 
     public class TrackArcLeftCommand : RobotCommand
     {
-        public double Radius { get; set; }
-        public double Angle { get; set; }
+        public float Radius { get; set; }
+        public float Angle { get; set; }
 
-        public void Execute()
+        public TrackArcLeftCommand(float radius, float angle)
         {
-            throw new NotImplementedException();
+            Radius = radius;
+            Angle = angle;
+        }
+
+        public override void Execute(Robot robot)
+        {
+            robot.Drive.RunArcLeft(Radius, Angle, Speed, Acceleration);
         }
     }
 }

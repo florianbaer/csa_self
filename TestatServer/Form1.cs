@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotCtrl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,13 @@ namespace TestatServer
     {
         int port = 80;
         TcpServer httpServer;
+        Robot robot;
 
         public Form1()
         {
             InitializeComponent();
+
+            robot = new Robot();
 
             httpServer = new TcpServer(port);
             httpServer.Log += new EventHandler(httpServerLogEvent);
