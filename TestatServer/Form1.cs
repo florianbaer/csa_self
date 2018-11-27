@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,9 +14,13 @@ namespace TestatServer
 {
     public partial class Form1 : Form
     {
-        int port = 80;
-        TcpServer httpServer;
-        Robot robot;
+        private int port = 1819;
+        private TcpServer httpServer;
+        private Robot robot;
+        private Thread driveThread;
+        private Thread logThread;
+        private Thread tcpThread;
+        private LogPosition logPosition;
 
         public Form1()
         {
@@ -26,15 +31,53 @@ namespace TestatServer
             httpServer = new TcpServer(port);
             httpServer.Log += new EventHandler(httpServerLogEvent);
 
-            Thread thread = new Thread(new ThreadStart(httpServer.Start));
-            thread.Start();
+            tcpThread = new Thread(new ThreadStart(httpServer.Start));
+            tcpThread.Start();
 
-            thread.Join();
+            ////Start drive
+            //driveThread = new Thread(new ThreadStart(Drive));
+            //driveThread.Start();
+
+            //logPosition = new LogPosition(this.robot);
+            //logThread = new Thread(new ThreadStart(logPosition.Start));
+            //logThread.Start();
+        }
+
+        private void Drive()
+        {
+            foreach (RobotCommand command in DriveCommand.ReadCommands())
+            {
+                command.Execute(this.robot);
+                while (!this.robot.Drive.Done)
+                {
+                    Thread.Sleep(100);
+                };
+            }
+
+            logThread.Abort();
         }
 
         public void httpServerLogEvent(object sender, EventArgs e)
         {
-            tbLog.Text += sender.ToString() + Environment.NewLine;
+            if(tbLog.InvokeRequired)
+            {
+                tbLog.BeginInvoke(new AddLog(SetLabel), new object[] { sender.ToString() });
+            }
+            
+        }
+
+        private delegate void AddLog(string log);
+
+
+        private void SetLabel(string log)
+        {
+            tbLog.Text += log.ToString() + Environment.NewLine;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            this.tcpThread.Abort();
+            base.OnClosing(e);
         }
     }
 }

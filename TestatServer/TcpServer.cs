@@ -14,12 +14,12 @@ namespace TestatServer
         TcpListener tcpListener;
         public event EventHandler Log;
         bool isActive;
-        CommandsXml xml;
+        DriveCommand xml;
 
         public TcpServer(int port)
         {
             tcpListener = new TcpListener(IPAddress.Any, port);
-            xml = new CommandsXml();
+            xml = new DriveCommand();
         }
 
         public void Start()
@@ -45,30 +45,21 @@ namespace TestatServer
                     isActive = HandleRequest(request);
 
 
-                    outputStream.WriteLine("OK");
-                    outputStream.Flush();
-                    outputStream.Close();
+                    //outputStream.WriteLine("OK");
+                    //outputStream.Flush();
+                    //outputStream.Close();
                 }
             }
-
-            CommandsXml.WriteXml(xml);
         }
 
         private bool HandleRequest(string request)
         {
-            RobotCommand rc = null;
+            DriveCommand.WriteCommand(request);
 
-            if (request.StartsWith("TrackLine"))
-            {
-                rc = new TrackLineRunCommand(1f);
-            }
-            else if(request.StartsWith("Start"))
+            if(request.StartsWith("Start"))
             {
                 return false;
             }
-
-            xml.Commands.Enqueue(rc);
-
             return true;
         }
     }

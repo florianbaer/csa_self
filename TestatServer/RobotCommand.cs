@@ -27,13 +27,18 @@ namespace TestatServer
         {
             robot.Drive.RunLine(Length, Speed, Acceleration);
         }
+
+        public override string ToString()
+        {
+            return "TrackLine " + Length;
+        }
     }
 
-    public class TrackTurnCommand : RobotCommand
+    public class TrackTurnLeftCommand : RobotCommand
     {
-        public float Angle { get; set; }
+        public int Angle { get; set; }
 
-        public TrackTurnCommand(float angle)
+        public TrackTurnLeftCommand(int angle)
         {
             Angle = angle;
         }
@@ -42,39 +47,74 @@ namespace TestatServer
         {
             robot.Drive.RunTurn(Angle, Speed, Acceleration);
         }
+
+        public override string ToString()
+        {
+            return "TrackTurnLeft " + Angle;
+        }
+    }
+
+    public class TrackTurnRightCommand : RobotCommand
+    {
+        public int Angle { get; set; }
+
+        public TrackTurnRightCommand(int angle)
+        {
+            Angle = angle;
+        }
+
+        public override void Execute(Robot robot)
+        {
+            robot.Drive.RunTurn(-Angle, Speed, Acceleration);
+        }
+
+        public override string ToString()
+        {
+            return "TrackTurnRight " + Angle;
+        }
     }
 
     public class TrackArcRightCommand : RobotCommand
     {
+        public int Angle { get; set; }
         public float Radius { get; set; }
-        public float Angle { get; set; }
 
-        public TrackArcRightCommand(float radius, float angle)
+        public TrackArcRightCommand(int angle, float radius)
         {
-            Radius = radius;
             Angle = angle;
+            Radius = radius;
         }
 
         public override void Execute(Robot robot)
         {
             robot.Drive.RunArcRight(Radius, Angle, Speed, Acceleration);
         }
+
+        public override string ToString()
+        {
+            return "TrackArcRight " + Angle + " " + Radius;
+        }
     }
 
     public class TrackArcLeftCommand : RobotCommand
     {
+        public int Angle { get; set; }
         public float Radius { get; set; }
-        public float Angle { get; set; }
 
-        public TrackArcLeftCommand(float radius, float angle)
+        public TrackArcLeftCommand(int angle, float radius)
         {
-            Radius = radius;
             Angle = angle;
+            Radius = radius;
         }
 
         public override void Execute(Robot robot)
         {
             robot.Drive.RunArcLeft(Radius, Angle, Speed, Acceleration);
+        }
+
+        public override string ToString()
+        {
+            return "TrackArcLeft " + Angle + " " + Radius;
         }
     }
 }
