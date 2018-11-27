@@ -13,8 +13,6 @@ namespace TestatServer
     {
         private const string FileUrl = @"\Temp\track.txt";
 
-        public DriveCommand() { }
-
         public static List<RobotCommand> ReadCommands()
         {
             CreateFileIfNotExists();
@@ -75,23 +73,41 @@ namespace TestatServer
             return commands;
         }
 
-        public static void WriteCommand(string command)
+        public static void AppendCommand(string command)
         {
             CreateFileIfNotExists();
 
+            string text = "";
+
+            using (StreamReader sr = new StreamReader(FileUrl))
+            {
+                text = sr.ReadToEnd();
+            }
+
+            if(!string.IsNullOrEmpty(text))
+            {
+                text += Environment.NewLine;
+            }
+
+            text += command;
+
             using (StreamWriter writer = new StreamWriter(FileUrl))
             {
-                writer.WriteLine(command);
+                writer.Write(text);
             }                
+        }
+
+        public static void CreateFile()
+        {
+            FileStream fs = File.Create(FileUrl);
+            fs.Close();
         }
 
         private static void CreateFileIfNotExists()
         {
             if (!File.Exists(FileUrl))
             {
-                FileStream fs = File.Create(FileUrl);
-
-                fs.Close();
+                CreateFile();
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace TestatServer
 {
@@ -14,12 +15,13 @@ namespace TestatServer
         TcpListener tcpListener;
         public event EventHandler Log;
         bool isActive;
-        DriveCommand xml;
+        Thread driveThread;
 
-        public TcpServer(int port)
+        public TcpServer(int port, Thread driveThread)
         {
+            this.driveThread = driveThread;
             tcpListener = new TcpListener(IPAddress.Any, port);
-            xml = new DriveCommand();
+            DriveCommand.CreateFile();
         }
 
         public void Start()
@@ -37,7 +39,7 @@ namespace TestatServer
                 if (client.ReceiveBufferSize > 0)
                 {
                     StreamReader inputStream = new StreamReader(client.GetStream());
-                    StreamWriter outputStream = new StreamWriter(client.GetStream());
+                    //StreamWriter outputStream = new StreamWriter(client.GetStream());
                     string request = inputStream.ReadLine();
                     inputStream.Close();
 
@@ -50,11 +52,13 @@ namespace TestatServer
                     //outputStream.Close();
                 }
             }
+
+            this.driveThread.Start();
         }
 
         private bool HandleRequest(string request)
         {
-            DriveCommand.WriteCommand(request);
+            DriveCommand.AppendCommand(request);
 
             if(request.StartsWith("Start"))
             {

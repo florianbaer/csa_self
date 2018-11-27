@@ -21,27 +21,47 @@ namespace TestatServer
 
         public void Start()
         {
-            File.Create(FileUrl);
-
-            using (StreamWriter writer = new StreamWriter(FileUrl))
-            {
-                writer.WriteLine(FileHeader);
-            }
+            CreateFile();
 
             while (!robot.Drive.Done)
             {
                 PositionInfo position = this.robot.Position;
-                writePosition(position.X, position.Y);
+                WritePosition(position.X, position.Y);
 
                 Thread.Sleep(200);
             }
         }
 
-        private void writePosition(float x, float y)
+        private void WritePosition(float x, float y)
         {
+            if(!File.Exists(FileUrl))
+            {
+                CreateFile();
+            }
+
+            string text = "";
+
+            using (StreamReader sr = new StreamReader(FileUrl))
+            {
+                text = sr.ReadToEnd();
+            }
+
+            text += Environment.NewLine + DateTime.Now.ToString("dd/MM/yyyy-hh:mm:ss.fff") + ";" + x + ";" + y;
+
             using (StreamWriter writer = new StreamWriter(FileUrl))
             {
-                writer.WriteLine(DateTime.Now.ToString("dd/MM/yyyy-hh:mm:ss.fff") + ";" + x + ";" + y);
+                writer.Write(text);
+            }
+        }
+
+        public void CreateFile()
+        {
+            FileStream fs = File.Create(FileUrl);
+            fs.Close();
+
+            using (StreamWriter writer = new StreamWriter(FileUrl))
+            {
+                writer.Write(FileHeader);
             }
         }
     }

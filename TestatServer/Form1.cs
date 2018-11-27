@@ -15,7 +15,7 @@ namespace TestatServer
     public partial class Form1 : Form
     {
         private int port = 1819;
-        private TcpServer httpServer;
+        private TcpServer tcpServer;
         private Robot robot;
         private Thread driveThread;
         private Thread logThread;
@@ -28,23 +28,22 @@ namespace TestatServer
 
             robot = new Robot();
 
-            httpServer = new TcpServer(port);
-            httpServer.Log += new EventHandler(httpServerLogEvent);
+            //Start drive
+            driveThread = new Thread(new ThreadStart(Drive));
+            logPosition = new LogPosition(this.robot);
+            logThread = new Thread(new ThreadStart(logPosition.Start));
 
-            tcpThread = new Thread(new ThreadStart(httpServer.Start));
-            tcpThread.Start();
+            tcpServer = new TcpServer(port, driveThread);
+            tcpServer.Log += new EventHandler(httpServerLogEvent);
 
-            ////Start drive
-            //driveThread = new Thread(new ThreadStart(Drive));
-            //driveThread.Start();
-
-            //logPosition = new LogPosition(this.robot);
-            //logThread = new Thread(new ThreadStart(logPosition.Start));
-            //logThread.Start();
+            tcpThread = new Thread(new ThreadStart(tcpServer.Start));
+            tcpThread.Start();          
         }
 
         private void Drive()
         {
+            logThread.Start();
+
             foreach (RobotCommand command in DriveCommand.ReadCommands())
             {
                 command.Execute(this.robot);
@@ -76,7 +75,9 @@ namespace TestatServer
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            this.tcpThread.Abort();
+            this.tcpThread?.Abort();
+            this.logThread?.Abort();
+            this.driveThread?.Abort();
             base.OnClosing(e);
         }
     }
