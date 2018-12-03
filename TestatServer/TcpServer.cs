@@ -32,25 +32,27 @@ namespace TestatServer
 
             while (isActive)
             {
-                TcpClient client = tcpListener.AcceptTcpClient();
-
-                NetworkStream stream = client.GetStream();
-
-                if (client.ReceiveBufferSize > 0)
+                using (TcpClient client = tcpListener.AcceptTcpClient())
                 {
-                    StreamReader inputStream = new StreamReader(client.GetStream());
-                    //StreamWriter outputStream = new StreamWriter(client.GetStream());
-                    string request = inputStream.ReadLine();
-                    inputStream.Close();
+                    using (NetworkStream stream = client.GetStream())
+                    {
+                        if (client.ReceiveBufferSize > 0)
+                        {
+                            StreamReader inputStream = new StreamReader(client.GetStream());
+                            StreamWriter outputStream = new StreamWriter(client.GetStream());
+                            string request = inputStream.ReadLine();
 
-                    Log?.Invoke(request, new EventArgs());
-                    isActive = HandleRequest(request);
+                            Log?.Invoke(request, new EventArgs());
+                            isActive = HandleRequest(request);
 
 
-                    //outputStream.WriteLine("OK");
-                    //outputStream.Flush();
-                    //outputStream.Close();
-                }
+                            outputStream.WriteLine("OK");
+                            outputStream.Flush();
+                            inputStream.Close();
+                            outputStream.Close();
+                        }
+                    }                        
+                }                    
             }
 
             this.driveThread.Start();

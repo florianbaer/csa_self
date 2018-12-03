@@ -23,7 +23,7 @@ namespace TestatServer
         {
             CreateFile();
 
-            while (!robot.Drive.Done)
+            while (true)
             {
                 PositionInfo position = this.robot.Position;
                 WritePosition(position.X, position.Y);

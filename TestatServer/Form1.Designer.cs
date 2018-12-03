@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.tbLog = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -51,7 +49,6 @@
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(631, 267);
             this.Controls.Add(this.tbLog);
-            this.Menu = this.mainMenu1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

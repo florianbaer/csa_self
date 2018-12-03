@@ -27,16 +27,17 @@ namespace TestatServer
             InitializeComponent();
 
             robot = new Robot();
-
-            //Start drive
-            driveThread = new Thread(new ThreadStart(Drive));
             logPosition = new LogPosition(this.robot);
-            logThread = new Thread(new ThreadStart(logPosition.Start));
 
+            //Alle benötigten Threads erzeugen
+            driveThread = new Thread(new ThreadStart(Drive));
+            logThread = new Thread(new ThreadStart(logPosition.Start));
+            tcpThread = new Thread(new ThreadStart(tcpServer.Start));
+
+            //tcp Server starten
             tcpServer = new TcpServer(port, driveThread);
             tcpServer.Log += new EventHandler(httpServerLogEvent);
 
-            tcpThread = new Thread(new ThreadStart(tcpServer.Start));
             tcpThread.Start();          
         }
 
@@ -47,6 +48,7 @@ namespace TestatServer
             foreach (RobotCommand command in DriveCommand.ReadCommands())
             {
                 command.Execute(this.robot);
+                tbLog.BeginInvoke(new AddLog(SetLabel), new object[] { command.ToString() + " started" });
                 while (!this.robot.Drive.Done)
                 {
                     Thread.Sleep(100);
@@ -61,8 +63,7 @@ namespace TestatServer
             if(tbLog.InvokeRequired)
             {
                 tbLog.BeginInvoke(new AddLog(SetLabel), new object[] { sender.ToString() });
-            }
-            
+            }            
         }
 
         private delegate void AddLog(string log);
