@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DriveCommand.cs" />
+    <Compile Include="Driver.cs" />
     <Compile Include="FileConstants.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
