@@ -125,11 +125,24 @@ namespace RobotClient
         private void SendAndGiveFeedback(string message)
         {
             TcpClient client = new TcpClient();
-            client.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.21"), 1819));
-            NetworkStream stream = client.GetStream();
-            var bytemsg = new ASCIIEncoding().GetBytes(message);
-            stream.Write(bytemsg, 0, bytemsg.Length);
-            client.Client.Close();
+            try
+            {
+                client.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.21"), 1819));
+                NetworkStream stream = client.GetStream();
+                var bytemsg = new ASCIIEncoding().GetBytes(message);
+                stream.Write(bytemsg, 0, bytemsg.Length);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR - Try again", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            finally
+            {
+                if (client.Client.IsBound)
+                {
+                    client.Client.Close();
+                }
+            }
             MessageBox.Show("Send successful", message);
         }
 
