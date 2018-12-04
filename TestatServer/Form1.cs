@@ -48,7 +48,6 @@ namespace TestatServer
 
             tcpThread.Start();
 
-            this.httpLogServerThread.Start();
         }
 
 
@@ -69,8 +68,6 @@ namespace TestatServer
 
             logThread.Abort();
             this.httpLogServerThread.Start();
-
-
         }
 
         public void httpServerLogEvent(object sender, EventArgs e)
