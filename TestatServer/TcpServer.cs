@@ -32,11 +32,11 @@ namespace TestatServer
             tcpListener.Start();
             Log?.Invoke("Tcp Server started", new EventArgs());
 
-            while (isActive)
+            while (true)
             {
                 using (TcpClient client = tcpListener.AcceptTcpClient())
                 {
-                    using (NetworkStream stream = client.GetStream())
+                    //using (NetworkStream stream = client.GetStream())
                     {
                         if (client.ReceiveBufferSize > 0)
                         {
@@ -54,9 +54,15 @@ namespace TestatServer
                             outputStream.Close();
                         }
                     }                        
-                }                    
+                }
+
+                if (!isActive)
+                {
+                    this.driveThread.Start();
+                    this.driveThread.Join();
+                    isActive = true;
+                }
             }
-            this.driveThread.Start();
         }
 
         private bool HandleRequest(string request)
