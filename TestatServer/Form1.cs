@@ -31,12 +31,13 @@ namespace TestatServer
 
             robot = new Robot();
             logPosition = new LogPosition(this.robot);
-            
+            this.robot.Drive.Power = true;
+
             //Alle benötigten Threads erzeugen
             driveThread = new Thread(new ThreadStart(Drive));
 
             //tcp Server starten
-            tcpServer = new TcpServer(port, driveThread);
+            tcpServer = new TcpServer(port, driveThread, httpLogServerThread);
             tcpServer.Log += new EventHandler(httpServerLogEvent);
 
             httpLogServer = new HttpLogServer(httpPort);
@@ -45,16 +46,20 @@ namespace TestatServer
             tcpThread = new Thread(new ThreadStart(tcpServer.Start));
             httpLogServerThread = new Thread(new ThreadStart(httpLogServer.Start));
 
-
             tcpThread.Start();
+        }
 
+        private void ResetThreads()
+        {
+            driveThread = new Thread(new ThreadStart(Drive));
+            logThread = new Thread(new ThreadStart(logPosition.Start));
+            tcpThread = new Thread(new ThreadStart(tcpServer.Start));
         }
 
 
         private void Drive()
         {
-            logThread.Start();
-            this.robot.Drive.Power = true;
+            logThread.Start();            
 
             foreach (RobotCommand command in DriveCommand.ReadCommands())
             {
@@ -67,6 +72,7 @@ namespace TestatServer
             }
 
             logThread.Abort();
+            httpLogServerThread = new Thread(new ThreadStart(httpLogServer.Start));
             this.httpLogServerThread.Start();
         }
 

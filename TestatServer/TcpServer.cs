@@ -16,10 +16,12 @@ namespace TestatServer
         public event EventHandler Log;
         bool isActive;
         Thread driveThread;
+        Thread httpThread;
 
-        public TcpServer(int port, Thread driveThread)
+        public TcpServer(int port, Thread driveThread, Thread httpThread)
         {
             this.driveThread = driveThread;
+            this.httpThread = httpThread;
             tcpListener = new TcpListener(IPAddress.Any, port);
             DriveCommand.CreateFile();
         }
@@ -54,7 +56,6 @@ namespace TestatServer
                     }                        
                 }                    
             }
-
             this.driveThread.Start();
         }
 
@@ -64,6 +65,7 @@ namespace TestatServer
 
             if(request.StartsWith("Start"))
             {
+                httpThread?.Abort();
                 return false;
             }
             return true;
