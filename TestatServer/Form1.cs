@@ -31,12 +31,14 @@ namespace TestatServer
 
             //Alle benötigten Threads erzeugen
             driveThread = new Thread(new ThreadStart(Drive));
-            logThread = new Thread(new ThreadStart(logPosition.Start));
-            tcpThread = new Thread(new ThreadStart(tcpServer.Start));
 
             //tcp Server starten
             tcpServer = new TcpServer(port, driveThread);
             tcpServer.Log += new EventHandler(httpServerLogEvent);
+
+            logThread = new Thread(new ThreadStart(logPosition.Start));
+            tcpThread = new Thread(new ThreadStart(tcpServer.Start));
+
 
             tcpThread.Start();          
         }
@@ -44,6 +46,7 @@ namespace TestatServer
         private void Drive()
         {
             logThread.Start();
+            this.robot.Drive.Power = true;
 
             foreach (RobotCommand command in DriveCommand.ReadCommands())
             {

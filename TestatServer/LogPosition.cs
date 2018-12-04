@@ -10,7 +10,7 @@ namespace TestatServer
 {
     public class LogPosition
     {
-        private const string FileUrl = "C:\\temp\\log.csv";
+        private const string FileUrl = @"\Temp\log.csv";
         private const string FileHeader = "Team Bär/Foster";
         private Robot robot;
 
