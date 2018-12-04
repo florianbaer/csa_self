@@ -46,7 +46,9 @@ namespace TestatServer
             httpLogServerThread = new Thread(new ThreadStart(httpLogServer.Start));
 
 
-            tcpThread.Start();          
+            tcpThread.Start();
+
+            this.httpLogServerThread.Start();
         }
 
 
@@ -66,7 +68,7 @@ namespace TestatServer
             }
 
             logThread.Abort();
-            this.tcpThread.Start();
+            this.httpLogServerThread.Start();
 
 
         }
@@ -92,6 +94,7 @@ namespace TestatServer
             this.tcpThread?.Abort();
             this.logThread?.Abort();
             this.driveThread?.Abort();
+            this.httpLogServerThread?.Abort();
             base.OnClosing(e);
         }
     }
