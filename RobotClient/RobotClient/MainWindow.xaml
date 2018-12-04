@@ -1,0 +1,109 @@
+﻿<Window x:Class="RobotClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RobotClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="485.14" Width="886.817">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Drive Streight -->
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label></Label>
+                <Label Grid.Column="0" Grid.Row="0">Track Line</Label>
+                <Label Grid.Column="0" Grid.Row="1">Length</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="LineWidthBox" FontSize="30"></TextBox>
+                <Button Content="Send command" Width="100" Height="20" Margin="0,20,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" Click="RunStreight"/>
+            </Grid>
+        </Grid>
+        <!-- Turn here -->
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label></Label>
+                <Label Grid.Column="0" Grid.Row="0">Turn around</Label>
+                <Label Grid.Column="0" Grid.Row="1">TurnAngleRight</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="TurnAroundRight" TextChanged="TurnTextChanged" FontSize="30"></TextBox>
+                <Label Grid.Column="0" Grid.Row="2">TurnAngleLeft</Label>
+                <TextBox Grid.Column="1" Grid.Row="2" Name="TurnAroundLeft" TextChanged="TurnTextChanged" FontSize="30"></TextBox>
+                <Button Content="Send command" Width="100" Height="20" Margin="0,20,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" Click="TurnAround"/>
+            </Grid>
+        </Grid>
+        <!-- Turn left -->
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label></Label>
+                <Label Grid.Column="0" Grid.Row="0">Turn Left</Label>
+                <Label Grid.Column="0" Grid.Row="1">TurnLeftAngle</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="TurnLeftAngle" FontSize="30"></TextBox>
+                <Label Grid.Column="0" Grid.Row="2">TurnLeftRadius</Label>
+                <TextBox Grid.Column="1" Grid.Row="2" Name="TurnLeftRadius" FontSize="30"></TextBox>
+                <Button Content="Send command" Width="100" Height="20" Margin="0,20,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" Click="TurnLeftArc"/>
+            </Grid>
+        </Grid>
+        <!-- Turn right -->
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label></Label>
+                <Label Grid.Column="0" Grid.Row="0">Turn right</Label>
+                <Label Grid.Column="0" Grid.Row="1">TurnRightAngle</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="TurnRightAngle" FontSize="30"></TextBox>
+                <Label Grid.Column="0" Grid.Row="2">TurnRightRadius</Label>
+                <TextBox Grid.Column="1" Grid.Row="2" Name="TurnRightRadius" FontSize="30"></TextBox>
+                <Button Content="Send command" Width="100" Height="20" Margin="0,20,0,0" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" Click="TurnRightArc"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button FontSize="30" Click="Go">GO</Button>
+        </Grid>
+    </Grid>
+</Window>
