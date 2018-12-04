@@ -15,7 +15,7 @@ namespace TestatServer
     public partial class Form1 : Form
     {
         private int port = 1819;
-        private int httpPort = 80;
+        private int httpPort = 8080;
         private TcpServer tcpServer;
         private Robot robot;
         private Thread driveThread;
