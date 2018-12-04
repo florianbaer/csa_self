@@ -46,12 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DriveCommand.cs" />
+    <Compile Include="FileConstants.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpLogServer.cs" />
     <Compile Include="LogPosition.cs" />
     <Compile Include="RobotCommand.cs" />
     <Compile Include="TcpServer.cs" />

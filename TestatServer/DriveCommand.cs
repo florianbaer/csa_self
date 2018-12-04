@@ -11,7 +11,6 @@ namespace TestatServer
     [XmlRoot("RobotCommand")]
     public class DriveCommand
     {
-        private const string FileUrl = @"\Temp\track.txt";
 
         public static List<RobotCommand> ReadCommands()
         {
@@ -19,7 +18,7 @@ namespace TestatServer
 
             List<RobotCommand> commands = new List<RobotCommand>();
 
-            using (StreamReader reader = new StreamReader(FileUrl))
+            using (StreamReader reader = new StreamReader(FileConstants.TrackFileUrl))
             {
                 while(reader.Peek() >= 0)
                 {
@@ -79,7 +78,7 @@ namespace TestatServer
 
             string text = "";
 
-            using (StreamReader sr = new StreamReader(FileUrl))
+            using (StreamReader sr = new StreamReader(FileConstants.TrackFileUrl))
             {
                 text = sr.ReadToEnd();
             }
@@ -91,7 +90,7 @@ namespace TestatServer
 
             text += command;
 
-            using (StreamWriter writer = new StreamWriter(FileUrl))
+            using (StreamWriter writer = new StreamWriter(FileConstants.TrackFileUrl))
             {
                 writer.Write(text);
             }                
@@ -99,13 +98,13 @@ namespace TestatServer
 
         public static void CreateFile()
         {
-            FileStream fs = File.Create(FileUrl);
+            FileStream fs = File.Create(FileConstants.TrackFileUrl);
             fs.Close();
         }
 
         private static void CreateFileIfNotExists()
         {
-            if (!File.Exists(FileUrl))
+            if (!File.Exists(FileConstants.TrackFileUrl))
             {
                 CreateFile();
             }

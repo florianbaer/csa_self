@@ -15,11 +15,14 @@ namespace TestatServer
     public partial class Form1 : Form
     {
         private int port = 1819;
+        private int httpPort = 80;
         private TcpServer tcpServer;
         private Robot robot;
         private Thread driveThread;
         private Thread logThread;
         private Thread tcpThread;
+        HttpLogServer httpLogServer;
+        private Thread httpLogServerThread;
         private LogPosition logPosition;
 
         public Form1()
@@ -28,7 +31,7 @@ namespace TestatServer
 
             robot = new Robot();
             logPosition = new LogPosition(this.robot);
-
+            
             //Alle benötigten Threads erzeugen
             driveThread = new Thread(new ThreadStart(Drive));
 
@@ -36,12 +39,16 @@ namespace TestatServer
             tcpServer = new TcpServer(port, driveThread);
             tcpServer.Log += new EventHandler(httpServerLogEvent);
 
+            httpLogServer = new HttpLogServer(httpPort);
+
             logThread = new Thread(new ThreadStart(logPosition.Start));
             tcpThread = new Thread(new ThreadStart(tcpServer.Start));
+            httpLogServerThread = new Thread(new ThreadStart(httpLogServer.Start));
 
 
             tcpThread.Start();          
         }
+
 
         private void Drive()
         {
@@ -59,6 +66,9 @@ namespace TestatServer
             }
 
             logThread.Abort();
+            this.tcpThread.Start();
+
+
         }
 
         public void httpServerLogEvent(object sender, EventArgs e)

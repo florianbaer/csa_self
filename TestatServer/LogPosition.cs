@@ -10,8 +10,6 @@ namespace TestatServer
 {
     public class LogPosition
     {
-        private const string FileUrl = @"\Temp\log.csv";
-        private const string FileHeader = "Team Bär/Foster";
         private Robot robot;
 
         public LogPosition(Robot robot)
@@ -34,21 +32,21 @@ namespace TestatServer
 
         private void WritePosition(float x, float y)
         {
-            if(!File.Exists(FileUrl))
+            if(!File.Exists(FileConstants.LogFileUrl))
             {
                 CreateFile();
             }
 
             string text = "";
 
-            using (StreamReader sr = new StreamReader(FileUrl))
+            using (StreamReader sr = new StreamReader(FileConstants.LogFileUrl))
             {
                 text = sr.ReadToEnd();
             }
 
             text += Environment.NewLine + DateTime.Now.ToString("dd/MM/yyyy-hh:mm:ss.fff") + ";" + x + ";" + y;
 
-            using (StreamWriter writer = new StreamWriter(FileUrl))
+            using (StreamWriter writer = new StreamWriter(FileConstants.LogFileUrl))
             {
                 writer.Write(text);
             }
@@ -56,12 +54,12 @@ namespace TestatServer
 
         public void CreateFile()
         {
-            FileStream fs = File.Create(FileUrl);
+            FileStream fs = File.Create(FileConstants.LogFileUrl);
             fs.Close();
 
-            using (StreamWriter writer = new StreamWriter(FileUrl))
+            using (StreamWriter writer = new StreamWriter(FileConstants.LogFileUrl))
             {
-                writer.Write(FileHeader);
+                writer.Write(FileConstants.FileHeader);
             }
         }
     }
