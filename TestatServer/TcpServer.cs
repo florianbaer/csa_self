@@ -61,11 +61,15 @@ namespace TestatServer
 
         private bool HandleRequest(string request)
         {
+            if (httpThread != null && httpThread.IsAlive)
+            {
+                httpThread?.Abort();
+            }
+
             DriveCommand.AppendCommand(request);
 
             if(request.StartsWith("Start"))
             {
-                httpThread?.Abort();
                 return false;
             }
             return true;
