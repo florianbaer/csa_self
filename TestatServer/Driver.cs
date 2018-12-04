@@ -18,8 +18,8 @@ namespace TestatServer
         public Driver(Robot robot, Thread httpLogServerThread, HttpLogServer httpLogServer,
             TextBox tblog)
         {
-            this.positionLogger = new LogPosition(this.robot);
             this.robot = robot;
+            this.positionLogger = new LogPosition(this.robot);
             this.httpLogServerThread = httpLogServerThread;
             this.httpLogServer = httpLogServer;
             this.tbLog = tblog;

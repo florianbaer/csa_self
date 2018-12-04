@@ -16,7 +16,7 @@ namespace TestatServer
         private int port = 1819;
         private int httpPort = 8080;
         private TcpServer tcpServer;
-        private Robot robot;
+        private static Robot robot;
         private Thread driveThread;
         private Driver driver;
         private Thread tcpThread;
@@ -30,23 +30,23 @@ namespace TestatServer
             InitializeComponent();
 
             robot = new Robot();
-            this.robot.Drive.Power = true;
+            robot.Drive.Power = true;
             this.BootstrapRoboCop();
         }
 
         private void BootstrapRoboCop()
         {
-            //Alle benötigten Threads erzeugen
-            driveThread = new Thread(driver.Drive);
-            driver = new Driver(this.robot, this.httpLogServerThread, this.httpLogServer, this.tbLog);
-            //tcp Server starten
-            tcpServer = new TcpServer(port, driveThread, httpLogServerThread);
-            tcpServer.Log += driver.httpServerLogEvent;
-
             httpLogServer = new HttpLogServer(httpPort);
-
-            tcpThread = new Thread(tcpServer.Start);
             httpLogServerThread = new Thread(httpLogServer.Start);
+
+            driver = new Driver(robot, this.httpLogServerThread, this.httpLogServer, this.tbLog);
+            driveThread = new Thread(driver.Drive);
+
+            tcpServer = new TcpServer(port, driveThread, httpLogServerThread);
+            tcpThread = new Thread(tcpServer.Start);
+            
+            tcpServer.Log += driver.httpServerLogEvent;
+            
 
             tcpThread.Start();
         }
