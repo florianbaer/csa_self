@@ -16,7 +16,7 @@ namespace TestatServer
         private int port = 1819;
         private int httpPort = 8080;
         private TcpServer tcpServer;
-        private static Robot robot;
+        private Robot robot;
         private Thread driveThread;
         private Driver driver;
         private Thread tcpThread;
@@ -40,9 +40,8 @@ namespace TestatServer
             httpLogServerThread = new Thread(httpLogServer.Start);
 
             driver = new Driver(robot, this.httpLogServerThread, this.httpLogServer, this.tbLog);
-            driveThread = new Thread(driver.Drive);
 
-            tcpServer = new TcpServer(port, driveThread, httpLogServerThread);
+            tcpServer = new TcpServer(port, driver, httpLogServerThread);
             tcpThread = new Thread(tcpServer.Start);
             
             tcpServer.Log += driver.httpServerLogEvent;
@@ -63,6 +62,8 @@ namespace TestatServer
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            this.robot.Drive.Power = false;
+            this.robot.Dispose();
             this.tcpThread?.Abort();
             this.driveThread?.Abort();
             this.httpLogServerThread?.Abort();

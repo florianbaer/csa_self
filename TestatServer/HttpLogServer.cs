@@ -36,8 +36,8 @@ namespace TestatServer
 
                             StringBuilder builder = new StringBuilder();
                             builder.AppendLine(@"HTTP/1.1 200 OK");
-                            builder.AppendLine(@"Content-Type: text/csv");
-                            builder.AppendLine("Content-Disposition: attachment; filename =\"LogFile.csv\"");
+                            builder.AppendLine(@"Content-Type: text/plain");
+                            //builder.AppendLine("Content-Disposition: attachment; filename =\"LogFile.csv\"");
                             builder.AppendLine(@"");
                             using (StreamReader reader = new StreamReader(FileConstants.LogFileUrl))
                             {

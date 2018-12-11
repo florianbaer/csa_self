@@ -15,13 +15,13 @@ namespace TestatServer
         TcpListener tcpListener;
         public event EventHandler Log;
         bool isActive;
-        Thread driveThread;
+        Driver driver;
         Thread httpThread;
 
-        public TcpServer(int port, Thread driveThread, Thread httpThread)
+        public TcpServer(int port, Driver driver, Thread httpThread)
         {
-            this.driveThread = driveThread;
             this.httpThread = httpThread;
+            this.driver = driver;
             tcpListener = new TcpListener(IPAddress.Any, port);
             DriveCommand.CreateFile();
         }
@@ -58,8 +58,10 @@ namespace TestatServer
 
                 if (!isActive)
                 {
-                    this.driveThread.Start();
-                    this.driveThread.Join();
+                    Thread driveThread = new Thread(new ThreadStart(driver.Drive));
+                    driveThread.Start();
+                    driveThread.Join();
+                    DriveCommand.CreateFile();
                     isActive = true;
                 }
             }

@@ -49,6 +49,7 @@ namespace TestatServer
             }
 
             this.logThread.Abort();
+            this.httpLogServerThread?.Abort();
             httpLogServerThread = new Thread(httpLogServer.Start);
             this.httpLogServerThread.Start();
         }

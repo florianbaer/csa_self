@@ -8,8 +8,8 @@ namespace TestatServer
 {
     public abstract class RobotCommand
     {
-        protected float Speed = 0.5f;
-        protected float Acceleration = 0.3f;
+        protected float Speed = 0.5f; //0.5f
+        protected float Acceleration = 0.3f; //0.3f
 
         public abstract void Execute(Robot robot);        
     }
